@@ -1,0 +1,21 @@
+"item_id";"product_name";"department_name";"price";"stock_quantity"
+1;"Top Hat";"Clothing";20;56
+2;"Baseball Cap";"Clothing";17;93
+3;"Toaster";"Housewares";49;130
+4;"Kettle";"Housewares";76;23
+5;"Spark Plugs";"Automotive";9;200
+6;"Walkman";"Electronics";24;5
+7;"Jeans";"Clothing";46;76
+8;"Frying Pan";"Housewares";12;62
+9;"Oil Filter";"Automotive";14;69
+10;"Blueray Player";"Electronics";67;5
+11;"T Shirt";"Clothing";19;89
+12;"Belt";"Clothing";6;81
+13;"Coffee Maker";"Housewares";72;112
+14;"Cutting Board";"Housewares";33;49
+15;"Air Filter";"Automotive";18;148
+16;"Home Theatre";"Electronics";153;52
+17;"Jean Jacket";"Clothing";88;96
+18;"Bread Basket";"Housewares";12;22
+19;"Radial Tire";"Automotive";235;34
+20;"LCD TV";"Electronics";530;57
