@@ -21,8 +21,7 @@ connection.connect(function(err) {
   if (err) throw err;
   // run the start function after the connection is made to prompt the user
   start();
-  //queryAllSongs();
-  //postAuction();
+  
 });
 
 function start() {
@@ -32,15 +31,16 @@ function start() {
 function queryAllProducts() {
     connection.query("SELECT * FROM products", function(err, res) {
         if (err) throw err;
+        console.log("\nPlease select your purchase from the items presented below.")
         console.log("\n-------------------------------------------------");
       for (var i = 0; i < res.length; i++) {
         console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + res[i].price + " | " + res[i].stock_quantity);
       }
       console.log("-------------------------------------------------\n");
 
-      var test = res[i];
+      var response = res[i];
 
-      postPurchase(test);
+      postPurchase(response);
     });
     
   }
@@ -65,40 +65,66 @@ function postPurchase() {
       ])
       .then(function(answer) {
         // when finished prompting, insert a new item into the db with that info
-        var chosenItem;
-        var chosenUnits;
+        //var chosenItem;
+        //var chosenUnits;
 
-            chosenItem = answer.item
-            chosenUnits = answer.units
+            var chosenItem = answer.item;
+            var chosenUnits = answer.units;
 
-        console.log("\nChosen Item: " + chosenItem);
-        console.log("\nChosen Units: " + chosenUnits);
+            getPrice();
         
         function getPrice(){
-            connection.query(
-                "SELECT price, stock_quantity FROM products WHERE ?",
-                [
-                    {
-                        item_id: chosenItem,
-                    }
-                ],
-                function(err, results) {
-                    if (err) throw err;
-                    //console.log(results);
-                    console.log("\nChosen Item Price: " + results[0].price);
-                    console.log("\nChosen Item Quantity: " + results[0].stock_quantity);
+          connection.query(
+            "SELECT price, stock_quantity FROM products WHERE ?",
+            [
+              {
+                item_id: chosenItem,
+              }
+            ],
+            function(err, results) {
+              if (err) throw err;
+              
+              var chosenItemPrice = results[0].price;
+              var chosenItemQty = results[0].stock_quantity;
+              
+              
+              // determine if there is enough quantity on hand
+              if (chosenUnits <= chosenItemQty) {
 
+                var updatedItemQty = chosenItemQty - chosenUnits;
+                var purchaseTotal = chosenUnits * chosenItemPrice
+                
+                // if there is enough quantity on hand then update products table
+                connection.query(
+                  "UPDATE products SET ? WHERE ?",
+                  [
+                    {
+                      stock_quantity: updatedItemQty
+                    },
+                    {
+                      item_id: chosenItem
+                    }
+                  ],
+                  function(error) {
+                    
+                    // if there is enough quantity on hand inform customer of success and present customer with total purchase price
+                    if (error) throw err;
+
+                    console.log("Item Quantity updated successfully!");
+                    console.log("\nYour Total Purchase Price is: $" + purchaseTotal + ".00");
+                    
+                    // transactions completed and exit application
                     connection.end();
+                  }
+                );
+              }
+                    else {
+                      // if there is not enough quantity on hand, apologize to the customer and have them start over
+                      console.log("\nInsufficient quantity on hand. Please try your purchase again...");
+                      start();
+                    }
                     }
                 )};
-
-        getPrice();
-
-
-
-
-
-
 
         }
     )};
