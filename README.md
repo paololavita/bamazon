@@ -1,8 +1,5 @@
 # bamazon
-Node.js &amp; MySQL: An Amazon-like storefront using MySQL Database
-
-The first message will ask them the ID of the product they would like to buy.
-The second message will ask how many units of the product they would like to buy.
+Node.js &amp; MySQL: An Amazon-like CLI Storefront using MySQL Database 
 
 ### Description
 
