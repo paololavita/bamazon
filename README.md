@@ -39,6 +39,8 @@ The Add to Inventory option allows the user to select a given item ID and add ad
 
 The Add New Product option allows the user to enter details about a new product which will be entered into the database upon completion of the form.
 
+Watch a LIVE Demo here: https://drive.google.com/file/d/1P0f_bcCiJI5a8VlueitNwS7qPKjbhQRz/view
+
 ### Manager Interace
 ***
 
