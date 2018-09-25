@@ -5,7 +5,7 @@ Node.js &amp; MySQL: An Amazon-like CLI Storefront using MySQL Database
 
 ***
 
-This application implements a simple command line based storefront using the npm inquirer package and the MySQL database backend together with the npm mysql package. The application presents two interfaces to thge user: 
+This application implements a simple command line based storefront using the npm inquirer package and the MySQL database backend together with the npm mysql package. The application presents two interfaces to the user: 
 
 * Customer (bamazonCustomer.js)
 * Manager (bamazonManager.js)
